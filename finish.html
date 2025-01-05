@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoVault - Send Memo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .contact-container {
+            padding: 20px;
+        }
+
+        .contact-left {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .contact-left-title {
+            margin-bottom: 10px;
+        }
+
+        .contact-inputs {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contact-container">
+    <form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
+        <div class="contact-left-title">
+            <h2>Send MemoVault</h2>
+            <hr>
+        </div>
+        <input type="hidden" name="access_key" value="b9f7df66-7774-412f-b15b-31ddd2568fdd">
+        <input type="text" name="name" placeholder="Your name" class="contact-inputs" required>
+        <input type="email" name="email" placeholder="Your email" class="contact-inputs" required>
+        
+        <input type="hidden" name="message" id="messageInput">
+
+        <button type="submit">Submit <img src="/assets/arrow_icon.png" alt=""></button>
+    </form>
+</div>
+
+<script>
+    window.onload = () => {
+        const memoContent = localStorage.getItem('memoContent');
+        const publishLink = `${window.location.origin}/publish.html`;
+
+        if (memoContent) {
+            const messageInput = document.getElementById('messageInput');
+            if (messageInput) {
+                messageInput.value = `You can view your published memo at: ${publishLink}?content=${encodeURIComponent(memoContent)}`;
+            } else {
+                console.error('Element with id "messageInput" not found!');
+            }
+        } else {
+            console.error('No memo content found in localStorage!');
+        }
+    };
+</script>
+
+
+
+</body>
+</html>
